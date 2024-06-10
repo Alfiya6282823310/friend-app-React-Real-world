@@ -1,20 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Viewall = () => {
-    const [data,changeData]=useState(
-        [
-            {
-            
-              "_id": "6665dd357f96fb262b8dd5a6",
-              "name": "Ramesh",
-              "friendName": "Tovino",
-              "friendNickName": "TT",
-              "DescribeYourFriend": "Test desc",
-              "__v": 0
+    const [data,changeData]=useState([])
+    const fetchData=()=>{
+        axios.get("https://friendsapi-re5a.onrender.com/view").then(
+            (response)=>{
+                changeData(response.data)
             }
-        ]   
-    )
+        ).catch().finally()
+    }
+    useEffect(()=>{fetchData()},[])
   return (
     <div>
         <Navbar/>
