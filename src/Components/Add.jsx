@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Add = () => {
     const [data,changeData]=useState(
@@ -17,6 +18,19 @@ const Add = () => {
     const readValue=()=>
         {
             console.log(data)
+            axios.post("https://friendsapi-re5a.onrender.com/adddata",data).then(
+                (response)=>{
+                    console.log(response.data)
+                    if(response.data.status=="success")
+                        {
+                            alert("success")
+
+                        }
+                        else{
+                            alert("error")
+                        }
+                }
+            ).catch().finally()
         }
   return (
     <div>
